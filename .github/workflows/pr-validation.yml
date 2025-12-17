@@ -17,7 +17,7 @@ jobs:
           fetch-depth: 0
 
       - name: Check linear history
-        uses: over88/reusable-cicd-actions/. github/actions/check-linear-history@main
+        uses: over88/reusable-cicd-actions/.github/actions/check-linear-history@main
 
       - name:  Check branch is up-to-date
         uses: over88/reusable-cicd-actions/.github/actions/check-branch-updated@main
