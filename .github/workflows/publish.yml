@@ -80,8 +80,8 @@ jobs:
         with:
           script: |
             github.rest.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              owner: '${{ github.repository_owner }}',
-              repo: '${{ github.event.repository.name }}',
-              body: `[INFO!] Successfully published version \`${{ steps.package-version.outputs.version }}\` to npm!\n\n📦 Package: https://www.npmjs.com/package/${{ github.event.repository.name }}/v/${{ steps.package-version.outputs.version }}\n🏷️ Tag: \`v${{ steps.package-version.outputs.version }}\``
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `[INFO!] Successfully published version \`${{ steps.package-version.outputs.version }}\` to npm!\n\n Package: https://www.npmjs.com/package/${{ github.event.repository.name }}/v/${{ steps.package-version.outputs.version }}\n Tag: \`v${{ steps.package-version.outputs.version }}\``
             })
