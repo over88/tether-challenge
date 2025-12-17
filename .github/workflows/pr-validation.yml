@@ -12,19 +12,19 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses:  actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Check linear history
-        uses: over88/reusable-cicd-actions/. github/actions/check-linear-history@main
+        uses: over88/reusable-cicd-actions/.github/actions/check-linear-history@main
 
-      - name:  Check branch is up-to-date
+      - name: Check branch is up-to-date
         uses: over88/reusable-cicd-actions/.github/actions/check-branch-updated@main
         with:
           base-branch: main
 
-      - name: Setup Node. js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -33,7 +33,7 @@ jobs:
       - name: Check lockfile exists
         run: |
           if [ ! -f "package-lock.json" ]; then
-            echo ":: error::package-lock.json is required"
+            echo "::error::package-lock.json is required"
             exit 1
           fi
 
@@ -63,7 +63,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses:  actions/checkout@v4
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -79,7 +79,7 @@ jobs:
 
   build-release-candidate:
     name: Build Release Candidate
-    runs-on:  ubuntu-latest
+    runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'publish')
     needs: validate
 
@@ -98,28 +98,29 @@ jobs:
 
       - name: Get version from package.json
         id: package-version
-        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+        run: |
+          echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
 
       - name: Check if version exists on npm
         run: |
           VERSION="${{ steps.package-version.outputs.version }}"
           PACKAGE_NAME=$(node -p "require('./package.json').name")
-          
+
           if npm view "$PACKAGE_NAME@$VERSION" version 2>/dev/null; then
-            echo ":: error::Version $VERSION already exists on npm"
+            echo "::error::Version $VERSION already exists on npm"
             exit 1
           fi
 
       - name: Create dev version
         id: dev-version
-        run:  |
+        run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
-          VERSION="${{ steps.package-version. outputs.version }}"
+          VERSION="${{ steps.package-version.outputs.version }}"
           DEV_VERSION="${VERSION}-dev-${SHORT_SHA}"
           echo "dev-version=${DEV_VERSION}" >> $GITHUB_OUTPUT
-          
+
           # Temporarily update version for artifact
-          npm version $DEV_VERSION --no-git-tag-version
+          npm version "$DEV_VERSION" --no-git-tag-version
 
       - name: Build
         run: npm run build
@@ -130,16 +131,16 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name:  release-candidate
+          name: release-candidate
           path: "*.tgz"
           retention-days: 30
 
       - name: Comment on PR
         uses: actions/github-script@v7
         with:
-          script:  |
+          script: |
             github.rest.issues.createComment({
-              issue_number: context. issue.number,
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `✅ Release candidate built successfully!\n\n**Version:** \`${{ steps.dev-version.outputs.dev-version }}\`\n**Artifact:** Available in workflow artifacts`
