@@ -10,6 +10,12 @@ jobs:
     name: Validate PR
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+      issues: write
+
     steps:
       - name: Checkout code
         uses:  actions/checkout@v4
@@ -17,14 +23,14 @@ jobs:
           fetch-depth: 0
 
       - name: Check linear history
-        uses: over88/reusable-cicd-actions/. github/actions/check-linear-history@main
+        uses: over88/reusable-cicd-actions/.github/actions/check-linear-history@main
 
       - name:  Check branch is up-to-date
         uses: over88/reusable-cicd-actions/.github/actions/check-branch-updated@main
         with:
           base-branch: main
 
-      - name: Setup Node. js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -135,12 +141,13 @@ jobs:
           retention-days: 30
 
       - name: Comment on PR
-        uses: actions/github-script@v7
+        if: ${{ github.event.pull_request.head.repo.fork == false }}
+        uses: actions/github-script@v8
         with:
-          script:  |
+          script: |
             github.rest.issues.createComment({
-              issue_number: context. issue.number,
+              issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ Release candidate built successfully!\n\n**Version:** \`${{ steps.dev-version.outputs.dev-version }}\`\n**Artifact:** Available in workflow artifacts`
+              body: `[INFO!] Release candidate built successfully!\n\n**Version:** \`${{ steps.dev-version.outputs.dev-version }}\`\n**Artifact:** Available in workflow artifacts`
             })
