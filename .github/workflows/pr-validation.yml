@@ -10,6 +10,12 @@ jobs:
     name: Validate PR
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: write
+      packages: write
+      pull-requests: write
+      issues: write
+
     steps:
       - name: Checkout code
         uses:  actions/checkout@v4
@@ -135,11 +141,11 @@ jobs:
           retention-days: 30
 
       - name: Comment on PR
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         with:
-          script:  |
+          script: |
             github.rest.issues.createComment({
-              issue_number: context. issue.number,
+              issue_number: ${{ github.event.pull_request.number }},
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: `[INFO!] Release candidate built successfully!\n\n**Version:** \`${{ steps.dev-version.outputs.dev-version }}\`\n**Artifact:** Available in workflow artifacts`
