@@ -141,6 +141,7 @@ jobs:
           retention-days: 30
 
       - name: Comment on PR
+        if: ${{ github.event.pull_request.head.repo.fork == false }}
         uses: actions/github-script@v8
         with:
           script: |
