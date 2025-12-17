@@ -65,8 +65,8 @@ jobs:
           script: |
             const version = '${{ steps.package-version.outputs.version }}';
             await github.rest.repos.createRelease({
-              owner: context. repo.owner,
-              repo: context.repo.repo,
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}',
               tag_name: `v${version}`,
               name: `Release v${version}`,
               body: `${{ steps.changelog.outputs.changelog }}`,
@@ -80,7 +80,7 @@ jobs:
           script: |
             github.rest.issues.createComment({
               issue_number: ${{ github.event.pull_request.number }},
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `[INFO!] Successfully published version \`${{ steps.package-version.outputs.version }}\` to npm!\n\n Package: https://www.npmjs.com/package/${{ github.event.repository.name }}/v/${{ steps.package-version.outputs.version }}\n Tag: \`v${{ steps.package-version.outputs.version }}\``
+              owner: '${{ github.repository_owner }}',
+              repo: '${{ github.event.repository.name }}',
+              body: `[INFO!] Successfully published version \`${{ steps.package-version.outputs.version }}\` to npm!\n\n📦 Package: https://www.npmjs.com/package/${{ github.event.repository.name }}/v/${{ steps.package-version.outputs.version }}\n🏷️ Tag: \`v${{ steps.package-version.outputs.version }}\``
             })
