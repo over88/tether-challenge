@@ -15,6 +15,7 @@ jobs:
     permissions:
       contents: write
       packages: write
+      pull-requests: write
 
     steps:
       - name: Checkout code
@@ -81,5 +82,5 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `🚀 Successfully published version \`${{ steps.package-version.outputs.version }}\` to npm!\n\n📦 Package:  https://www.npmjs.com/package/${context.repo.repo}/v/${{ steps.package-version.outputs.version }}\n🏷️ Tag: \`v${{ steps.package-version.outputs.version }}\``
+              body: `[INFO!] Successfully published version \`${{ steps.package-version.outputs.version }}\` to npm!\n\n📦 Package:  https://www.npmjs.com/package/${context.repo.repo}/v/${{ steps.package-version.outputs.version }}\n🏷️ Tag: \`v${{ steps.package-version.outputs.version }}\``
             })
