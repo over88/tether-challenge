@@ -89,6 +89,11 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'publish')
     needs: validate
 
+    permissions:
+      contents: read
+      pull-requests: write
+
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
