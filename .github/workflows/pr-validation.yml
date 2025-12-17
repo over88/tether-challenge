@@ -142,5 +142,5 @@ jobs:
               issue_number: context. issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `✅ Release candidate built successfully!\n\n**Version:** \`${{ steps.dev-version.outputs.dev-version }}\`\n**Artifact:** Available in workflow artifacts`
+              body: `[INFO!] Release candidate built successfully!\n\n**Version:** \`${{ steps.dev-version.outputs.dev-version }}\`\n**Artifact:** Available in workflow artifacts`
             })
