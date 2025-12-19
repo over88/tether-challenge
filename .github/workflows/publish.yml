@@ -48,7 +48,7 @@ jobs:
 
       - name: Create Git tag
         run: |
-          VERSION="v${{ steps.package-version. outputs.version }}"
+          VERSION="${{ steps.package-version. outputs.version }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users. noreply.github.com"
           git tag -a "$VERSION" -m "Release $VERSION"
