@@ -1,5 +1,5 @@
 {
-  "name": "@over88/typescript-sum-package",
+  "name": "@over88org/typescript-sum-package",
   "version": "1.0.3",
   "description": "A simple TypeScript package demonstrating CI/CD",
   "main": "dist/index.js",
