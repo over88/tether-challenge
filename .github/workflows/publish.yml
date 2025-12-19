@@ -68,8 +68,8 @@ jobs:
             await github.rest.repos.createRelease({
               owner: '${{ github.repository_owner }}',
               repo: '${{ github.event.repository.name }}',
-              tag_name: `v${version}`,
-              name: `Release v${version}`,
+              tag_name: `${version}`,
+              name: `Release ${version}`,
               body: `${{ steps.changelog.outputs.changelog }}`,
               draft: false,
               prerelease: false
