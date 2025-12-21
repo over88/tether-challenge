@@ -21,7 +21,6 @@ This package provides basic math utilities:
 4. Ensure you have the `NPM_TOKEN` secret configured in GitHub repository settings
 5. Ensure branch protection is set up (run once): `gh workflow run setup-branch-protection.yml`
 
-
 ### Option 1: Using the Helper Script (Recommended)
 
 ```bash
