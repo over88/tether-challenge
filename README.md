@@ -16,8 +16,11 @@ This package provides basic math utilities:
 
 ### Prerequisites
 1. Clone the repository
-2. Ensure you have the `NPM_TOKEN` secret configured in GitHub repository settings
-3. Ensure branch protection is set up (run once): `gh workflow run setup-branch-protection.yml`
+2. Ensure `git` and `gh` are installed in your terminal
+3. Configure your SSH key with GitHub so pushes succeed
+4. Ensure you have the `NPM_TOKEN` secret configured in GitHub repository settings
+5. Ensure branch protection is set up (run once): `gh workflow run setup-branch-protection.yml`
+
 
 ### Option 1: Using the Helper Script (Recommended)
 
