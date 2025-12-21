@@ -50,8 +50,8 @@ Then just **merge the PR** and automation takes over.
 #### Step 1: Create a Feature/Release Branch
 
 ```bash
-git checkout main
-git pull origin main
+git checkout develop
+git pull origin develop
 git checkout -b release/v1.2.3
 ```
 
