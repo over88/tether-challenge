@@ -112,7 +112,7 @@ gh pr create \
 
 ```bash
 # Using GitHub CLI
-gh pr edit <PR_NUMBER> --add-label publish
+gh pr edit <PR_NUMBER> --add-label publish verify
 
 # Or add via GitHub web interface: 
 # Go to PR → Labels → Select "publish"
