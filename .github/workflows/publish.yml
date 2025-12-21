@@ -42,7 +42,7 @@ jobs:
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
       - name: Publish to npm
-        run: echo "npm publish"
+        run: echo "npm publish" # should be npm publish when you got proper setup credntials
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
