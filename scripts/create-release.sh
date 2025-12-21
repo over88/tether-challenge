@@ -5,7 +5,7 @@ set -e
 
 if [ -z "$1" ]; then
   echo "Usage: ./scripts/create-release.sh <version-type>"
-  echo "  version-type: patch|minor|major"
+  echo "version-type: patch|minor|major"
   exit 1
 fi
 
