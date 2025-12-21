@@ -203,7 +203,7 @@ gh pr merge <PR_NUMBER> --squash
 **When to use:** Any PR that should result in a new npm package version
 
 ```bash
-gh pr edit <PR_NUMBER> --add-label publish
+gh pr edit <PR_NUMBER> --add-label publish verify
 ```
 
 ### `verify` Label
