@@ -36,5 +36,6 @@ gh pr create \
   --title "chore: release v$NEW_VERSION" \
   --body "Release version $NEW_VERSION" \
   --label "publish"
+  --label "verify"
 
 echo "[INFO!] Release PR created for v$NEW_VERSION"
